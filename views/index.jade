@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	nav(class='navbar navbar-inverse navbar-fixed-top')
+		div(class='container')
+			div(class='navbar-header')
+				button(class='navbar-toggle' aria-controls='navbar' aria-expanded='false' data-target='#navbar' data-toggle='collapse' type='button')
+					span(class='sr-only') Toggle Navigation
+					span(class='icon-bar')
+					span(class='icon-bar')
+					span(class='icon-bar')
+				a(class='navbar-brand' href='#') MyExpressJSApp
+			div(class='navbar-collapse collapse' id='navbar')
+				ul(class='nav navbar-nav')
+					li(class='active')
+						a(href='#') Home
+					li
+						a(href='#') About
+					li
+						a(href='#') Contact
+				form(class='navbar-form navbar-right')
+					div(class='form-group')
+						input(class='form-control' type='text' placeholder='Email')
+					div(class='form-group')
+						input(class='form-control' type='password' placeholder='Password')
+					button(class='btn btn-success' type='submit') Sign In
+	div(class='jumbotron')
+		div(class='container')
+			h1 Hello, world!
+			p This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+			p
+				a(class='btn btn-primary btn-lg' role='button' href='#') Learn more >>
