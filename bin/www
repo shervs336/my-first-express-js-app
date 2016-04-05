@@ -20,10 +20,22 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
 
+/**
+ * Create Socket.IO object
+ */
+var io = require('socket.io')(server);
+
+/**
+ * Listen to socket.
+ */
 io.on('connection', function(socket){
 	console.log("Someone connects");
+	io.emit('welcome message', { message: 'Welcome to the chat' });
+	
+	socket.on('send', function(data) {
+		io.sockets.emit('message', data);
+	});
 	
 	socket.on('disconnect', function(){
 		console.log("Someone didn't care");
@@ -32,6 +44,12 @@ io.on('connection', function(socket){
 	socket.on('chat message', function(msg){
 		io.emit('chat message', msg);
 	});
+	
+	socket.on('retrive message', function(msg){
+		io.emit('retrive message', msg);
+	});
+	
+
 });
 
 /**

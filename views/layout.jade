@@ -11,12 +11,34 @@ html
 		script(src='/javascripts/bootstrap.js')
 		script(src='/javascripts/socket.io/socket.io.js')
 		script.
+			var messages = [];
+		
 			var socket = io();
 			$('form').submit(function(){
-				socket.emit('chat message', $('#m').val());
+				socket.emit('send', { message: $('#m').val() });
 				$('#m').val('');
 				return false;
 			});
+			socket.on('message', function (data) {
+				if(data.message) {
+					messages.push(data.message);
+					var msgs = '';
+					for(var i=0; i<messages.length; i++){
+						msgs += '<li>'+messages[i]+'</li>';
+					}
+					$('#r').html(msgs);
+					console.log(messages);
+				}
+			});
+			/*
 			socket.on('chat message', function(msg){
+				if(msg.message){
+					messages.push(msg);
+				}
 				$('#r').append($('<li>').text(msg));
+			});
+			*/
+			socket.on('welcome message', function(msg){
+				console.log(msg);
+				$('#w').text(msg["message"]);
 			});
